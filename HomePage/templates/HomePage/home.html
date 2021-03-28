@@ -1,0 +1,256 @@
+{% extends 'HomePage/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+
+{% block title %} Главная {% endblock %}
+{% block home %}active{% endblock %}
+{% block favicon %} {{ site_info.favicon.url }} {% endblock %}
+{% block logo %} {{ site_info.site_logo.url }} {% endblock %}
+{% block logo_foot %} {{ site_info.site_logo.url }} {% endblock %}
+{% block phone_number %} {{ site_info.phone_number }}{% endblock %}
+{% block phone %} {{ site_info.phone_number }} {% endblock %}
+{% block email %}{{ site_info.email }}{% endblock %}
+{% block email_addres %} {{ site_info.email }} {% endblock %}
+{% block vk %} {{ site_info.vk_url }} {% endblock %}
+{% block whatsapp %}{{ site_info.whatsapp_url }}{% endblock %}
+{% block telegram %}{{ site_info.telegram_url }}{% endblock %}
+{% block instagram %}{{ site_info.instagram_url }} {% endblock %}
+
+
+{% block greeting %}
+    <div class="hero-wrap js-fullheight"
+         style="background-image: url({% static 'images/bg_1.jpg' %}); background-attachment: fixed">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start"
+                 data-scrollax-parent="true">
+                <div class="col-md-6 ftco-animate">
+                    <h2 class="subheading">Добро пожаловать в {{ site_info.name }}</h2>
+                    <h1>Вам не нужно знать все законы. Мы знаем.
+                        <span
+                                class="txt-rotate"
+                                data-period="2000"
+                                data-rotate='[ "Права.", "Мечта.", "Успех.", "Помощь." ]'></span>
+                    </h1>
+                    <!-- <h1 class="mb-4">Attorneys Fighting For Your Freedom</h1> -->
+                    <p class="mb-4">Мы поможем тысячам с решением практически любых юридических вопросов.</p>
+                    <p><a href="#contact" class="btn btn-primary mr-md-4 py-2 px-4 cta">Получить бесплатную консультацию
+                        <span
+                                class="ion-ios-arrow-forward"></span></a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <section class="ftco-section ftco-no-pt">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 py-5">
+                    <div class="heading-section ftco-animate">
+                        <span class="subheading">Услуги</span>
+                        <h2 class="mb-4">Почему выбирают нас?</h2>
+                        <ul class="list-unstyled">
+                            <li><p class="py-1 d-block"><span
+                                    class="ion-ios-arrow-forward mr-3"></span>Показатели вашего бизнеса останутся под
+                                нашей надежной защитой</p></li>
+                            <li><p class="py-1 d-block"><span
+                                    class="ion-ios-arrow-forward mr-3"></span>Обратились к нам, чтобы решить юридические
+                                вопросы и сократить издержки</p></li>
+                            <li><p class="py-1 d-block"><span
+                                    class="ion-ios-arrow-forward mr-3"></span>В нашей команде только лучшие юристы и
+                                эксперты в области права</p></li>
+                            <li><p class="py-1 d-block"><span
+                                    class="ion-ios-arrow-forward mr-3"></span>Консультируем в офисе, при личной встрече,
+                                и по интернету</p></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-9 services-wrap px-4 pt-5">
+                    <div class="row pt-md-3">
+                        {% for practice in practice_areas %}
+                            <div class="services-items col-md-4 d-flex align-items-stretch">
+                                <div class="services text-center">
+                                    <div class="icon d-flex justify-content-center align-items-center">
+                                        <img src="{{ practice.preview_image.url }}" alt="картинка здания">
+                                    </div>
+                                    <div class="text">
+                                        <h3>{{ practice.title }}</h3>
+                                        <p>{{ practice.preview_text }}</p>
+                                    </div>
+                                    <a href="{% url 'service-detail' practice.pk %}"
+                                       class="btn-custom d-flex align-items-center justify-content-center"><span
+                                            class="ion-ios-arrow-round-forward"></span></a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="team-member-section">
+        <div class="container-fluid px-md-5">
+            <div class="row justify-content-center mb-5 pb-3">
+                <div class="col-lg-12 text-center heading-section ftco-animate">
+                    <span class="subheading">О нас</span>
+                    <h2 class="mb-4">Наша команда юристов</h2>
+                </div>
+                {% for employee in employees %}
+                    <div class="member-item set-bg" data-setbg="{{ employee.employee_image.url }}">
+                        <div class="mi-social">
+                            <div class="mi-social-inner bg-gradient">
+                                <a href="{{ employee.whatsapp_url }}" target="_blank"><span
+                                        class="icon-whatsapp"></span></a>
+                                <a href="{{ employee.telegram_url }}" target="_blank"><span
+                                        class="icon-telegram"></span></a>
+                                <a href="{{ employee.vk_url }}" target="_blank"><span
+                                        class="icon-vk"></span></a>
+                            </div>
+                        </div>
+                        <div class="mi-text">
+                            <h5>
+                                <a class="text-dark"
+                                   href="{% url 'about' %}">{{ employee.last_name|add:" "|add:employee.first_name|add:" "|add:employee.middle_name }}</a>
+                            </h5>
+                            <span>{{ employee.specialization }}</span>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section class="ftco-section bg-light">
+        <div class="container">
+            <div class="row justify-content-center mb-5 pb-3">
+                <div class="col-md-7 heading-section text-center ftco-animate">
+                    <h2>Наши клиенты</h2>
+                </div>
+            </div>
+            <div class="partner-logo owl-carousel">
+                {% for partner in partners %}
+                    <a href="{{ partner.partner_url }}" class="pl-table" target="_blank">
+                        <div class="pl-tablecell">
+                            <img src="{{ partner.partner_logo.url }}" alt="{{ partner.partner_name }}">
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <section id="contact" class="ftco-consultation ftco-section ftco-no-pt ftco-no-pb img"
+             style="background-image: url('{% static 'images/bg_2.jpg' %}');">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row d-md-flex justify-content-end">
+                <div class="col-md-6 half p-3 py-5 pl-md-5 heading-section heading-section-white">
+                    <span class="subheading">Запись на прием</span>
+                    <h2 class="mb-4">Бесплатная консультация</h2>
+                    <form class="consultation" method="post">
+                        {% csrf_token %}
+                        {{ form.non_field_errors }}
+                        <div class="form-group">
+                            {{ form.name|as_crispy_field }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.sender|as_crispy_field }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.phone_number|as_crispy_field }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.message|as_crispy_field }}
+                        </div>
+                        <div class="form-group">
+                            <input name="sub" type="submit" value="Отправить" class="btn btn-dark py-3 px-4">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Comment Form Section End -->
+
+    <section class="ftco-section" style="padding-bottom: 0">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-md-7 text-center heading-section">
+                    <span class="subheading">Отзывы</span>
+                    <h2 class="mb-4">Последние отзывы наших клиентов</h2>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid"
+             style="background-color: #AFA939; padding-top: 2%; padding-left: 2%; padding-right: 2%">
+            <div class="row no-gutter">
+                <div class="row">
+                    <!-- ***** Testimonials Item Start ***** -->
+                    {% for review in reviews %}
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="review-item">
+                                <div class="review-content">
+                                    <i><img src="{% static 'images/testimonial-icon.png' %}" alt=""></i>
+                                    <p class="text-justify">{{ review.text|linebreaksbr|truncatechars:150 }}</p>
+                                    <div class="review-info">
+                                        <h3 class="review-name">{{ review.last_name|add:" "|add:review.first_name }}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ***** Testimonials Item End ***** -->
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!-- Comment Form Section Begin -->
+        <div class="comment-section spad"
+             style="background-color: #AFA939; padding-top: 2%; padding-left: 2%; padding-right: 2%">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="col-md-12 text-center heading-section" style="padding-bottom: 2%">
+                            <h2 class="text-white">Оставьте и вы свой отзыв о нас</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8 m-auto">
+                        <form class="comment-form" method="post">
+                            {% csrf_token %}
+                            {{ review_form.non_field_errors }}
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    {{ review_form.first_name|as_crispy_field }}
+                                </div>
+                                <div class="col-lg-6">
+                                    {{ review_form.last_name|as_crispy_field }}
+                                </div>
+                                <div class="col-lg-12 text-center">
+                                    {{ review_form.text|as_crispy_field }}
+                                    <div class="form-group">
+                                        <input name="edit" type="submit" value="Отправить"
+                                               class="btn btn-dark py-3 px-4">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Comment Form Section End -->
+    </section>
+{% endblock %}
+
+{% block foot-services %}
+    {% for service in practice_areas %}
+        <li><a href="{% url 'service-detail' service.pk %}" class="py-1 d-block"><span
+                class="ion-ios-arrow-forward mr-3"></span>{{ service.title }}</a>
+        </li>
+    {% endfor %}
+{% endblock %}
+

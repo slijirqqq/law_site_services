@@ -1,0 +1,120 @@
+{% extends 'HomePage/base.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+
+{% block title %} Контакты {% endblock %}
+{% block contact %}active{% endblock %}
+{% block favicon %} {{ site_info.favicon.url }} {% endblock %}
+{% block logo %} {{ site_info.site_logo.url }} {% endblock %}
+{% block logo_foot %} {{ site_info.site_logo.url }} {% endblock %}
+{% block phone_number %} {{ site_info.phone_number }}{% endblock %}
+{% block phone %} {{ site_info.phone_number }} {% endblock %}
+{% block email %}{{ site_info.email }}{% endblock %}
+{% block email_addres %} {{ site_info.email }} {% endblock %}
+{% block vk %} {{ site_info.vk_url }} {% endblock %}
+{% block whatsapp %}{{ site_info.whatsapp_url }}{% endblock %}
+{% block telegram %}{{ site_info.telegram_url }}{% endblock %}
+{% block instagram %}{{ site_info.instagram_url }} {% endblock %}
+
+{% block greeting %}
+    <section class="hero-wrap hero-wrap-2"
+             style="background-image: url('{% static 'images/bg_1.jpg' %}'); background-attachment: fixed;">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row no-gutters slider-text align-items-end justify-content-center">
+                <div class="col-md-9 ftco-animate pb-5 text-center">
+                    <h1 class="mb-3 bread">Контакты {{ site_info.name }}</h1>
+                    <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'home' %}">Главная <i
+                            class="ion-ios-arrow-forward"></i></a></span> <span>Контакты <i
+                            class="ion-ios-arrow-forward"></i></span>{% block title_service %}{% endblock %}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block content %}
+    <div id="contact" class="ftco-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-lg-7 mb-5">
+                    <div class="heading-section"><h2>
+                        Запоните форму для консультации с нашими юристами.
+                    </h2></div>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.non_field_errors }}
+                        <div class="form-group">
+                            {{ form.name|as_crispy_field }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.sender|as_crispy_field }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.phone_number|as_crispy_field }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.message|as_crispy_field }}
+                        </div>
+                        <div class="form-group">
+                            <input name="sub" type="submit" value="Отправить" class="btn btn-primary py-3 px-4">
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-lg-4 ml-auto">
+                    <div class="p-4 mb-3 bg-white">
+                        <h3 class="h5 text-black mb-3">Контактная информация:</h3>
+                        <p class="mb-0 font-weight-bold text-black">Номер телефона:</p>
+                        <p class="mb-4"><a href="tel:{{ site_info.phone_number }}">{{ site_info.phone_number }}</a></p>
+
+                        <p class="mb-0 font-weight-bold text-black">Почтовый адрес:</p>
+                        <p class="mb-0"><a href="mailto:{{ site_info.email }}">{{ site_info.email }}</a></p>
+                        <div class="ft-social" style="margin-right: auto; margin-left: auto; padding-top: 6%">
+                            <a href="{{ site_info.whatsapp_url }}" target="_blank"><i
+                                    class="icon-whatsapp"></i></a>
+                            <a href="{{ site_info.vk_url }}" target="_blank"><i class="icon-vk"></i></a>
+                            <a href="{{ site_info.telegram_url }}" target="_blank"><i
+                                    class="icon-telegram"></i></a>
+                            <a href="{{ site_info.instagram_url }}" target="_blank"><i class="icon-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="ftco-section ftco-no-pt ftco-no-pb" style="background-color: #222831">
+        <div class="container">
+            <div class="row d-flex justify-content-end">
+                <div class="col-md-12 py-4 px-md-4" style="background-color: #222831">
+                    <div class="row">
+                        <div class="col-md-6 ftco-animate d-flex align-items-center">
+                            <h2 class="mb-0" style="color:white; font-size: 24px;">У вас есть к нам вопрос?</h2>
+                        </div>
+                        <div class="col-md-6 d-flex align-items-center">
+                            <form class="subscribe-form" method="post">
+                                {% csrf_token %}
+                                {{ question_form.nonfield_errors }}
+                                <div class="form-group d-flex">
+                                    {{ question_form.question_text|as_crispy_field }}
+                                    <input name="quest" type="submit" value="Отправить" class="btn btn-outline-light">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block foot-services %}
+    {% for service in services %}
+        <li><a href="{% url 'service-detail' service.pk %}" class="py-1 d-block"><span
+                class="ion-ios-arrow-forward mr-3"></span>{{ service.title }}</a>
+        </li>
+    {% endfor %}
+{% endblock %}
+

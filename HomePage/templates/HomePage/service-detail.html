@@ -1,0 +1,41 @@
+{% extends 'HomePage/services.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+
+{% block title %} Услуги {% endblock %}
+{% block services %}active{% endblock %}
+{% block favicon %} {{ site_info.favicon.url }} {% endblock %}
+{% block logo %} {{ site_info.site_logo.url }} {% endblock %}
+{% block logo_foot %} {{ site_info.site_logo.url }} {% endblock %}
+{% block phone_number %} {{ site_info.phone_number }}{% endblock %}
+{% block phone %} {{ site_info.phone_number }} {% endblock %}
+{% block email %}{{ site_info.email }}{% endblock %}
+{% block email_addres %} {{ site_info.email }} {% endblock %}
+{% block vk %} {{ site_info.vk_url }} {% endblock %}
+{% block whatsapp %}{{ site_info.whatsapp_url }}{% endblock %}
+{% block telegram %}{{ site_info.telegram_url }}{% endblock %}
+{% block instagram %}{{ site_info.instagram_url }} {% endblock %}
+
+
+{% block title_service %}
+    <span>{{ service.title }} <i
+            class="ion-ios-arrow-forward"></i></span>
+{% endblock %}
+
+{% block single_service %}
+    <div class="ftco-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <img src="{{ service.overview_image.url }}" alt="Image" class="img-fluid">
+                </div>
+                <div class="col-lg-6 pl-lg-5 heading-section">
+                    <h2 class="mb-4">{{ service.title }}</h2>
+                    <p class="text-justify">{{ service.overview_text }}</p>
+                    <p>Цена: {{ service.price }} руб.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

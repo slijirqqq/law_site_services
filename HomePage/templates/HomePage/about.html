@@ -1,0 +1,261 @@
+{% extends 'HomePage/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+
+{% block title %} О нас {% endblock %}
+{% block about %}active{% endblock %}
+{% block favicon %} {{ site_info.favicon.url }} {% endblock %}
+{% block logo %} {{ site_info.site_logo.url }} {% endblock %}
+{% block logo_foot %} {{ site_info.site_logo.url }} {% endblock %}
+{% block phone_number %} {{ site_info.phone_number }}{% endblock %}
+{% block phone %} {{ site_info.phone_number }} {% endblock %}
+{% block email %}{{ site_info.email }}{% endblock %}
+{% block email_addres %} {{ site_info.email }} {% endblock %}
+{% block vk %} {{ site_info.vk_url }} {% endblock %}
+{% block whatsapp %}{{ site_info.whatsapp_url }}{% endblock %}
+{% block telegram %}{{ site_info.telegram_url }}{% endblock %}
+{% block instagram %}{{ site_info.instagram_url }} {% endblock %}
+
+{% block greeting %}
+    <section class="hero-wrap hero-wrap-2"
+             style="background-image: url('{% static 'images/bg_1.jpg' %}'); background-attachment: fixed;">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row no-gutters slider-text align-items-end justify-content-center">
+                <div class="col-md-9 ftco-animate pb-5 text-center">
+                    <h1 class="mb-3 bread">О {{ site_info.name }}</h1>
+                    <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'home' %}">Главная <i
+                            class="ion-ios-arrow-forward"></i></a></span> <span>О нас <i
+                            class="ion-ios-arrow-forward"></i></span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block content %}
+    <section class="ftco-section ftco-no-pt ftco-no-pb" style="margin-bottom: 2%">
+        <div class="container">
+            <div class="row d-flex">
+                <div class="col-md-6 d-flex">
+                    <div class="img d-flex align-self-stretch align-items-center justify-content-center justify-content-md-end"
+                         style="background-image:url({{ about.preview_image.url }});">
+                    </div>
+                </div>
+                <div class="col-md-6 pl-md-5 py-md-5">
+                    <div class="row justify-content-start pt-3 pb-3">
+                        <div class="col-md-12 heading-section ftco-animate">
+                            <h2 class="mb-4">Мы всегда боремся за вашу справедливость, чтобы победить</h2>
+                            <p>Юридическая компания {{ site_info.name }} — это команда юристов,
+                                готовых помочь Вам в решении правовых задач.
+                            </p>
+                            <div class="tabulation-2 mt-4">
+                                <ul class="nav nav-pills nav-fill d-md-flex d-block">
+                                    <li class="nav-item mb-md-0 mb-2">
+                                        <a class="nav-link active py-2" data-toggle="tab" href="#home1">Наша миссия</a>
+                                    </li>
+                                    <li class="nav-item px-lg-2 mb-md-0 mb-2">
+                                        <a class="nav-link py-2" data-toggle="tab" href="#home2">Наш взгляд</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link py-2 mb-md-0 mb-2" data-toggle="tab" href="#home3">Наша
+                                            ценность</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content bg-light rounded mt-2">
+                                    <div class="tab-pane container p-0 active" id="home1">
+                                        <p>{{ about.our_mission }}</p>
+                                    </div>
+                                    <div class="tab-pane container p-0 fade" id="home2">
+                                        <p>{{ about.our_vision }}</p>
+                                    </div>
+                                    <div class="tab-pane container p-0 fade" id="home3">
+                                        <p>{{ about.our_value }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="ftco-counter" id="section-counter">
+        <div class="container-fluid">
+            <div class="row d-flex">
+                <div class="col-md-6 px-5 py-5">
+                    <div class="row justify-content-start pt-3 pb-3">
+                        <div class="col-md-12 heading-section ftco-animate fadeInUp ftco-animated"><span
+                                class="subheading">Ничто не обходится нам так дешево и не ценится так дорого, как вовремя оказанная юридическая помощь...</span>
+                            <h2 class="mb-4">4 причины, почему клиенты выбирают нашу <span class="ur_company">юридическую компанию</span>
+                            </h2></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 justify-content-center counter-wrap ftco-animate fadeInUp ftco-animated">
+                            <div class="block-18 text-center py-4 bg-gold mb-4">
+                                <div class="text">
+                                    <div class="icon d-flex justify-content-center align-items-center"><span
+                                            class="flaticon-lawyer"></span></div>
+                                    <strong class="number"
+                                            data-number="{{ about.professional_employees }}">{{ about.professional_employees }}</strong>
+                                    <span>Профессиональных юриста в команде</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 justify-content-center counter-wrap ftco-animate fadeInUp ftco-animated">
+                            <div class="block-18 text-center py-4 bg-gold mb-4">
+                                <div class="text">
+                                    <div class="icon d-flex justify-content-center align-items-center"><span
+                                            class="flaticon-handshake"></span></div>
+                                    <strong class="number"
+                                            data-number="{{ about.clients_work }}">{{ about.clients_work }}</strong>
+                                    <span>Клиентов в работе</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 justify-content-center counter-wrap ftco-animate fadeInUp ftco-animated">
+                            <div class="block-18 text-center py-4 bg-gold mb-4">
+                                <div class="text">
+                                    <div class="icon d-flex justify-content-center align-items-center"><span
+                                            class="ion-ios-checkbox-outline"></span></div>
+                                    <strong class="number"
+                                            data-number="{{ about.succses_areas }}">{{ about.succses_areas }}</strong>
+                                    <span>Успешных дел</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 justify-content-center counter-wrap ftco-animate fadeInUp ftco-animated">
+                            <div class="block-18 text-center py-4 bg-gold mb-4">
+                                <div class="text">
+                                    <div class="icon d-flex justify-content-center align-items-center"><span
+                                            class="flaticon-medal"></span></div>
+                                    <strong class="number"
+                                            data-number="{{ about.consultation_price }}">{{ about.consultation_price }}</strong>
+                                    <span>Консультация {{ about.consultation_price }} рублей</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 d-flex">
+                    <div class="img d-flex align-self-stretch align-items-center justify-content-center rocket-lazyload"
+                         style="background-image: url({{ about.second_preview_image.url }});"
+                         data-was-processed="true"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- latest BLog Section Begin -->
+    {% if sertificates %}
+        <section class="ftco-section ftco-no-pb">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="heading-section text-center ftco-animate">
+                            <span class="subheading">Достижения</span>
+                            <h2 class="mb-4">Наши сертификаты</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    {% for sertificat in sertificates %}
+                        <div class="col-lg-6">
+                            <div class="latest-item set-bg" data-setbg="{{ sertificat.sertificat_image.url }}"></div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+    <!-- latest BLog Section End -->
+
+    <section id="contact" class="ftco-consultation ftco-section ftco-no-pt ftco-no-pb img"
+             style="background-image: url('{% static 'images/bg_2.jpg' %}');">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row d-md-flex justify-content-end">
+                <div class="col-md-6 half p-3 py-5 pl-md-5 heading-section heading-section-white">
+                    <span class="subheading">Запись на прием</span>
+                    <h2 class="mb-4">Бесплатная консультация</h2>
+                    <form class="consultation" method="post">
+                        {% csrf_token %}
+                        {{ form.non_field_errors }}
+                        <div class="form-group">
+                            {{ form.name|as_crispy_field }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.sender|as_crispy_field }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.phone_number|as_crispy_field }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.message|as_crispy_field }}
+                        </div>
+                        <div class="form-group">
+                            <input name="sub" type="submit" value="Отправить" class="btn btn-dark py-3 px-4">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Comment Form Section End -->
+
+    <!-- Speaker Section Begin -->
+    <section class="speaker-section" style="margin-top: 4%">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="heading-section text-center ftco-animate" style="margin-bottom: 7%">
+                        <span class="subheading">Команда</span>
+                        <h2 class="mb-4">Специлисты нашей компании</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {% for employee in employees %}
+                    <div class="col-sm-6">
+                        <div class="speaker-item">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="si-pic">
+                                        <img src="{{ employee.employee_image.url }}" alt="Фото">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="si-text">
+                                        <div class="si-title">
+                                            <h4>{{ employee.last_name|add:" "|add:employee.first_name }}</h4>
+                                            <span>{{ employee.specialization }}</span>
+                                        </div>
+                                        <div class="si-social">
+                                            <a href="{{ employee.whatsapp_url }}" target="_blank"><span
+                                                    class="icon-whatsapp"></span></a>
+                                            <a href="{{ employee.telegram_url }}" target="_blank"><span
+                                                    class="icon-telegram"></span></a>
+                                            <a href="{{ employee.vk_url }}" target="_blank"><span
+                                                    class="icon-vk"></span></a>
+                                        </div>
+                                        <p>{{ employee.about }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- Speaker Section End -->
+{% endblock %}
+
+{% block foot-services %}
+    {% for service in services %}
+        <li><a href="{% url 'service-detail' service.pk %}" class="py-1 d-block"><span class="ion-ios-arrow-forward mr-3"></span>{{ service.title }}</a>
+        </li>
+    {% endfor %}
+{% endblock %}

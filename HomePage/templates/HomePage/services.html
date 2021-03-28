@@ -1,0 +1,178 @@
+{% extends 'HomePage/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+
+{% block title %} Услуги {% endblock %}
+{% block services %}active{% endblock %}
+{% block favicon %} {{ site_info.favicon.url }} {% endblock %}
+{% block logo %} {{ site_info.site_logo.url }} {% endblock %}
+{% block logo_foot %} {{ site_info.site_logo.url }} {% endblock %}
+{% block phone_number %} {{ site_info.phone_number }}{% endblock %}
+{% block phone %} {{ site_info.phone_number }} {% endblock %}
+{% block email %}{{ site_info.email }}{% endblock %}
+{% block email_addres %} {{ site_info.email }} {% endblock %}
+{% block vk %} {{ site_info.vk_url }} {% endblock %}
+{% block whatsapp %}{{ site_info.whatsapp_url }}{% endblock %}
+{% block telegram %}{{ site_info.telegram_url }}{% endblock %}
+{% block instagram %}{{ site_info.instagram_url }} {% endblock %}
+
+
+{% block greeting %}
+    <section class="hero-wrap hero-wrap-2"
+             style="background-image: url('{% static 'images/bg_1.jpg' %}'); background-attachment: fixed;">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row no-gutters slider-text align-items-end justify-content-center">
+                <div class="col-md-9 ftco-animate pb-5 text-center">
+                    <h1 class="mb-3 bread">Области практики {{ site_info.name }}</h1>
+                    <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'home' %}">Главная <i
+                            class="ion-ios-arrow-forward"></i></a></span> <span>Услуги <i
+                            class="ion-ios-arrow-forward"></i></span>{% block title_service %}{% endblock %}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block content %}
+    {% block single_service %}
+    {% endblock %}
+    <div class="section-2">
+        <div class="container">
+            <div class="row no-gutters align-items-stretch align-items-center">
+                {% for service in services %}
+                    <div class="col-lg-4">
+                        <a href="{% url 'service-detail' pk=service.pk %}">
+                            <div class="service-1 first h-100"
+                                 style="background-image: url('{{ service.overview_image.url }}')">
+                                <div class="service-1-contents">
+                                    <span class="wrap-icon text-white">
+                                        <span class="icon-legal"></span>
+                                    </span>
+                                    <h2>{{ service.title }}</h2>
+                                    <p class="text-justify">{{ service.overview_text|linebreaks|truncatechars:200 }}</p>
+                                    <p>Цена: {{ service.price }}</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 mr-auto">
+                    <div class="heading-section"><h2 class="mb-5">Счастливые <span class="text-primary">Клиенты</span>
+                    </h2></div>
+                    <div class="owl-carousel nonloop-block-4 testimonial-slider">
+                        {% for review in reviews %}
+                            <div class="testimony-1">
+                                <div class="d-flex align-items-center mb-4">
+                                    <div>
+                                        <h3>{{ review.last_name|add:" "|add:review.first_name }}</h3>
+                                    </div>
+                                </div>
+                                <blockquote>
+                                    <p class="text-justify">{{ review.text }}</p>
+                                </blockquote>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% if questions %}
+                    <div class="col-lg-6">
+                        <div class="heading-section"><h2 class="mb-5">Ответы <span
+                                class="text-primary">на вопросы</span></h2>
+                        </div>
+                        {% for question in questions %}
+                            <div class="border p-3 rounded mb-2">
+                                <a data-toggle="collapse" href="#collapse-1" role="button" aria-expanded="true"
+                                   aria-controls="collapse-1"
+                                   class="accordion-item h5 d-block mb-0">{{ question.question_text }}</a>
+
+                                <div class="collapse" id="collapse-1">
+                                    <div class="pt-2">
+                                        {% for answer in question.answers_set.all %}
+                                            <p class="mb-0">{{ answer.answer_text }}</p>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="ftco-section"
+             style="background-image: url('{% static 'images/no_time.jpg' %}'); background-size: cover">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 order-md-last ftco-animate fadeInUp ftco-animated text-white"><h2
+                        class="mb-3 text-white">Нет времени
+                    разбираться</h2>
+                    <h3 class="mb-3 text-white">ПРЯМО СЕЙЧАС</h3>
+                    <p>Оставьте ваш телефон, мы перезвоним в удобное время, выслушаем и поможем во всем разобраться!</p>
+                </div>
+                <div class="col-lg-6 order-md-last ftco-animate no_time_second_block fadeInUp ftco-animated">
+                    <form class="consultation" method="post">
+                        {% csrf_token %}
+                        {{ form.non_field_errors }}
+                        <div class="form-group">
+                            {{ form.name|as_crispy_field }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.sender|as_crispy_field }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.phone_number|as_crispy_field }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.message|as_crispy_field }}
+                        </div>
+                        <div class="form-group">
+                            <input name="sub" type="submit" value="Отправить" class="btn btn-dark py-3 px-4">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="ftco-section ftco-no-pt ftco-no-pb" style="background-color: #222831">
+        <div class="container">
+            <div class="row d-flex justify-content-end">
+                <div class="col-md-12 py-4 px-md-4" style="background-color: #222831">
+                    <div class="row">
+                        <div class="col-md-6 ftco-animate d-flex align-items-center">
+                            <h2 class="mb-0" style="color:white; font-size: 24px;">У вас есть к нам вопрос?</h2>
+                        </div>
+                        <div class="col-md-6 d-flex align-items-center">
+                            <form class="subscribe-form" method="post">
+                                {% csrf_token %}
+                                {{ question_form.nonfield_errors }}
+                                <div class="form-group d-flex">
+                                    {{ question_form.question_text|as_crispy_field }}
+                                    <input name="quest" type="submit" value="Отправить" class="btn btn-outline-light">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block foot-services %}
+    {% for service in services %}
+        <li><a href="{% url 'service-detail' service.pk %}" class="py-1 d-block"><span class="ion-ios-arrow-forward mr-3"></span>{{ service.title }}</a>
+        </li>
+    {% endfor %}
+{% endblock %}

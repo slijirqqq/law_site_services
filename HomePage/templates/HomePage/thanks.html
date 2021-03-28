@@ -1,0 +1,37 @@
+{% extends 'HomePage/base.html' %}
+
+{% load static %}
+{% block title %} О нас {% endblock %}
+{% block favicon %} {{ site_info.favicon.url }} {% endblock %}
+{% block logo %} {{ site_info.site_logo.url }} {% endblock %}
+{% block logo_foot %} {{ site_info.site_logo.url }} {% endblock %}
+{% block phone_number %} {{ site_info.phone_number }}{% endblock %}
+{% block phone %} {{ site_info.phone_number }} {% endblock %}
+{% block email %}{{ site_info.email }}{% endblock %}
+{% block email_addres %} {{ site_info.email }} {% endblock %}
+{% block vk %} {{ site_info.vk_url }} {% endblock %}
+{% block whatsapp %}{{ site_info.whatsapp_url }}{% endblock %}
+{% block telegram %}{{ site_info.telegram_url }}{% endblock %}
+{% block instagram %}{{ site_info.instagram_url }} {% endblock %}
+
+
+{% block greeting %}
+    <section class="hero-wrap hero-wrap-2"
+             style="background-image: url('{% static 'images/bg_1.jpg' %}'); background-attachment: fixed;">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row no-gutters slider-text align-items-end justify-content-center">
+                <div class="col-md-9 ftco-animate pb-5 text-center">
+                    <h1 class="mb-3 bread">{{ message }}</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block foot-services %}
+    {% for service in services %}
+        <li><a href="{% url 'service-detail' service.pk %}" class="py-1 d-block"><span class="ion-ios-arrow-forward mr-3"></span>{{ service.title }}</a>
+        </li>
+    {% endfor %}
+{% endblock %}
