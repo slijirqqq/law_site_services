@@ -59,7 +59,8 @@ class ContactView(View):
 class ServiceDetail(View):
     template_name = 'HomePage/service-detail.html'
     context = {'reviews': Reviews.objects.filter(created_date__lte=timezone.now()).filter(validation='y').order_by(
-        "created_date").reverse()[:3], 'questions': Questions.objects.filter(answers__validation='y')[:3], 'services': Practice_areas.objects.all()}
+        "created_date").reverse()[:3], 'questions': Questions.objects.filter(answers__validation='y')[:3],
+               'site_info': Site_info(), 'services': Practice_areas.objects.all()}
 
     def get(self, request, pk):
         self.context['service'] = Practice_areas.objects.get(pk=pk)
