@@ -10,7 +10,7 @@ from .models import SiteInfo, PartnerModel, EmployeeModel, Reviews, Practice_are
 
 
 def Site_info():
-    return SiteInfo.objects.get(pk=1)
+    return SiteInfo.objects.all()
 
 class ContactView(View):
     template_name = 'HomePage/contact.html'
@@ -37,7 +37,7 @@ class ContactView(View):
                 except BadHeaderError:  # Защита от уязвимости
                     return HttpResponse('Invalid header found')
                 context = {'message': 'Спасибо за вашу заявку, скоро мы ответим!',
-                           'site_info': SiteInfo.objects.get(pk=1),
+                           'site_info': SiteInfo.objects.all(),
                            'services': Practice_areas.objects.all()}
                 return render(request, 'HomePage/thanks.html', context)
             self.context['form'] = form
@@ -49,7 +49,7 @@ class ContactView(View):
                 question_text = question_form.cleaned_data['question_text']
                 question_form.save(commit=True)
                 context = {'message': 'Спасибо за оставленный вами вопрос, скоро мы на него ответим!',
-                           'site_info': SiteInfo.objects.get(pk=1), 'services': Practice_areas.objects.all()}
+                           'site_info': SiteInfo.objects.all(), 'services': Practice_areas.objects.all()}
                 return render(request, 'HomePage/thanks.html', context)
             self.context['form'] = ContactForm()
             self.context['question_form'] = question_form
@@ -185,7 +185,7 @@ class AboutListView(View):
 
 
 def home_page_view(request):
-    site_info = SiteInfo.objects.get(pk=1)
+    site_info = SiteInfo.objects.all()
     partners = PartnerModel.objects.all()
     employees = EmployeeModel.objects.all()
     reviews = Reviews.objects.filter(created_date__lte=timezone.now()).filter(validation='y').order_by(
