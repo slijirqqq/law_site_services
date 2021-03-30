@@ -9,9 +9,12 @@ from .models import SiteInfo, PartnerModel, EmployeeModel, Reviews, Practice_are
     Questions
 
 
+def Site_info():
+    return SiteInfo.objects.last()
+
 class ContactView(View):
     template_name = 'HomePage/contact.html'
-    context = {'site_info': SiteInfo.objects.last(), 'services': Practice_areas.objects.all()}
+    context = {'site_info': SiteInfo(), 'services': Practice_areas.objects.all()}
 
     def get(self, request):
         self.context['form'] = ContactForm()
