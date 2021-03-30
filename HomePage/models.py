@@ -28,7 +28,8 @@ class SiteInfo(models.Model):
     telegram_url = models.URLField(verbose_name='Ссылка на telegram')
     instagram_url = models.URLField(verbose_name='Ссылка на instagram')
     email = models.EmailField(verbose_name='Почта сайта')
-    phone_number = models.CharField(default='89120157067', blank=False, verbose_name='Контактный телефон')
+    phone_number = PhoneNumberField(default='89120157067', null=False, blank=False, unique=False,
+                                    verbose_name='Контактный телефон')
 
     def __str__(self):
         return 'Компания {}'.format(self.name)
