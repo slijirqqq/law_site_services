@@ -60,7 +60,7 @@ class ServiceDetail(View):
     template_name = 'HomePage/service-detail.html'
     context = {'reviews': Reviews.objects.filter(created_date__lte=timezone.now()).filter(validation='y').order_by(
         "created_date").reverse()[:3], 'questions': Questions.objects.filter(answers__validation='y')[:3],
-               'site_info': SiteInfo.objects.last(), 'services': Practice_areas.objects.all()}
+               'site_info': Site_info(), 'services': Practice_areas.objects.all()}
 
     def get(self, request, pk):
         self.context['service'] = Practice_areas.objects.get(pk=pk)
@@ -84,7 +84,7 @@ class ServiceDetail(View):
                     send_mail(subject, message + '\n' + str(phone_number), sender, recipients)
                 except BadHeaderError:  # Защита от уязвимости
                     return HttpResponse('Invalid header found')
-                context = {'message': 'Спасибо за вашу заявку, скоро мы ответим!', 'site_info': SiteInfo.objects.last(),
+                context = {'message': 'Спасибо за вашу заявку, скоро мы ответим!', 'site_info': Site_info(),
                            'services': Practice_areas.objects.all()}
                 return render(request, 'HomePage/thanks.html', context)
             self.context['form'] = form
@@ -97,7 +97,7 @@ class ServiceDetail(View):
                 question_text = question_form.cleaned_data['question_text']
                 question_form.save(commit=True)
                 context = {'message': 'Спасибо за оставленный вами вопрос, скоро мы на него ответим!',
-                           'site_info': SiteInfo.objects.last(), 'services': Practice_areas.objects.all()}
+                           'site_info': Site_info(), 'services': Practice_areas.objects.all()}
                 return render(request, 'HomePage/thanks.html', context)
             self.context['form'] = ContactForm()
             self.context['service'] = Practice_areas.objects.all()
@@ -107,7 +107,7 @@ class ServiceDetail(View):
 
 class ServicesListView(View):
     template_name = 'HomePage/services.html'
-    context = {'site_info': SiteInfo.objects.last(),
+    context = {'site_info': Site_info(),
                'reviews': Reviews.objects.filter(created_date__lte=timezone.now()).filter(validation='y').order_by(
                    "created_date").reverse()[:3], 'services': Practice_areas.objects.all(),
                'questions': Questions.objects.filter(answers__validation='y')[:3]}
@@ -133,7 +133,7 @@ class ServicesListView(View):
                     send_mail(subject, message + '\n' + str(phone_number), sender, recipients)
                 except BadHeaderError:  # Защита от уязвимости
                     return HttpResponse('Invalid header found')
-                context = {'message': 'Спасибо за вашу заявку, скоро мы ответим!', 'site_info': SiteInfo.objects.last(),
+                context = {'message': 'Спасибо за вашу заявку, скоро мы ответим!', 'site_info': Site_info(),
                            'services': Practice_areas.objects.all()}
                 return render(request, 'HomePage/thanks.html', context)
             self.context['form'] = form
@@ -145,7 +145,7 @@ class ServicesListView(View):
                 question_text = question_form.cleaned_data['question_text']
                 question_form.save(commit=True)
                 context = {'message': 'Спасибо за оставленный вами вопрос, скоро мы на него ответим!',
-                           'site_info': SiteInfo.objects.last(), 'services': Practice_areas.objects.all()}
+                           'site_info': Site_info(), 'services': Practice_areas.objects.all()}
                 return render(request, 'HomePage/thanks.html', context)
             self.context['form'] = ContactForm()
             self.context['question_form'] = question_form
@@ -154,7 +154,7 @@ class ServicesListView(View):
 
 class AboutListView(View):
     template_name = 'HomePage/about.html'
-    context = {'site_info': SiteInfo.objects.last(), 'employees': EmployeeModel.objects.all(),
+    context = {'site_info': Site_info(), 'employees': EmployeeModel.objects.all(),
                'sertificates': SertificatesModel.objects.all(),
                'about': AboutPageModel.objects.last(), 'services': Practice_areas.objects.all()}
 
@@ -177,7 +177,7 @@ class AboutListView(View):
                     send_mail(subject, message + '\n' + str(phone_number), sender, recipients)
                 except BadHeaderError:  # Защита от уязвимости
                     return HttpResponse('Invalid header found')
-                context = {'message': 'Спасибо за вашу заявку, скоро мы ответим!', 'site_info': SiteInfo.objects.last(),
+                context = {'message': 'Спасибо за вашу заявку, скоро мы ответим!', 'site_info': Site_info(),
                            'services': Practice_areas.objects.all()}
                 return render(request, 'HomePage/thanks.html', context)
             self.context['form'] = form
@@ -206,7 +206,7 @@ def home_page_view(request):
                 send_mail(subject, message + '\n' + str(phone_number), sender, recipients)
             except BadHeaderError:  # Защита от уязвимости
                 return HttpResponse('Invalid header found')
-            context = {'message': 'Спасибо за вашу заявку, скоро мы ответим!', 'site_info': SiteInfo.objects.last(),
+            context = {'message': 'Спасибо за вашу заявку, скоро мы ответим!', 'site_info': site_info,
                        'services': Practice_areas.objects.all()}
             return render(request, 'HomePage/thanks.html', context)
     else:
@@ -219,7 +219,7 @@ def home_page_view(request):
             text = review_form.cleaned_data['text']
             review_form.save(commit=True)
             context = {'message': 'Спасибо. Мы благодарны Вам за оставленный отзыв!',
-                       'site_info': SiteInfo.objects.last(), 'services': Practice_areas.objects.all()}
+                       'site_info': site_info, 'services': Practice_areas.objects.all()}
             return render(request, 'HomePage/thanks.html', context)
     else:
         review_form = ReviewForm()
