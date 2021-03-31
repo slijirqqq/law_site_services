@@ -211,7 +211,7 @@ def home_page_view(request):
                 send_mail(subject, message + '\n' + str(phone_number), sender, recipients)
             except BadHeaderError:  # Защита от уязвимости
                 return HttpResponse('Invalid header found')
-            context = {'message': 'Спасибо за вашу заявку, скоро мы ответим!', 'site_info': site_info(),
+            context = {'message': 'Спасибо за вашу заявку, скоро мы ответим!', 'site_info': Site_info(),
                        'services': Practice_areas.objects.all()}
             return render(request, 'HomePage/thanks.html', context)
     else:
@@ -224,10 +224,10 @@ def home_page_view(request):
             text = review_form.cleaned_data['text']
             review_form.save(commit=True)
             context = {'message': 'Спасибо. Мы благодарны Вам за оставленный отзыв!',
-                       'site_info': site_info(), 'services': Practice_areas.objects.all()}
+                       'site_info': Site_info(), 'services': Practice_areas.objects.all()}
             return render(request, 'HomePage/thanks.html', context)
     else:
         review_form = ReviewForm()
     return render(request, 'HomePage/home.html',
-                  {'site_info': site_info(), 'partners': partners, 'employees': employees, 'form': form,
+                  {'site_info': Site_info(), 'partners': partners, 'employees': employees, 'form': form,
                    'reviews': reviews, 'review_form': review_form, 'practice_areas': practice_areas})
