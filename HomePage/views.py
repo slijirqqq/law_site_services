@@ -14,7 +14,7 @@ def Site_info():
 
 
 def About_page_model():
-    return AboutPageModel.objects.get(pk=1)
+    return AboutPageModel.objects.all()
 
 
 class ContactView(View):
