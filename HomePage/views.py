@@ -10,7 +10,7 @@ from .models import SiteInfo, PartnerModel, EmployeeModel, Reviews, Practice_are
 
 
 def Site_info():
-    return SiteInfo.objects.all()
+    return SiteInfo.objects.get(pk=1)
 
 
 def About_page_model():
@@ -19,7 +19,7 @@ def About_page_model():
 
 class ContactView(View):
     template_name = 'HomePage/contact.html'
-    context = {'site_info': SiteInfo(), 'services': Practice_areas.objects.all()}
+    context = {'site_info': Site_info(), 'services': Practice_areas.objects.all()}
 
     def get(self, request):
         self.context['form'] = ContactForm()
@@ -42,7 +42,7 @@ class ContactView(View):
                 except BadHeaderError:  # Защита от уязвимости
                     return HttpResponse('Invalid header found')
                 context = {'message': 'Спасибо за вашу заявку, скоро мы ответим!',
-                           'site_info': SiteInfo.objects.all(),
+                           'site_info': Site_info(),
                            'services': Practice_areas.objects.all()}
                 return render(request, 'HomePage/thanks.html', context)
             self.context['form'] = form
@@ -54,7 +54,7 @@ class ContactView(View):
                 question_text = question_form.cleaned_data['question_text']
                 question_form.save(commit=True)
                 context = {'message': 'Спасибо за оставленный вами вопрос, скоро мы на него ответим!',
-                           'site_info': SiteInfo.objects.all(), 'services': Practice_areas.objects.all()}
+                           'site_info': Site_info(), 'services': Practice_areas.objects.all()}
                 return render(request, 'HomePage/thanks.html', context)
             self.context['form'] = ContactForm()
             self.context['question_form'] = question_form
@@ -190,7 +190,7 @@ class AboutListView(View):
 
 
 def home_page_view(request):
-    site_info = SiteInfo.objects.all()
+    site_info = Site_info()
     partners = PartnerModel.objects.all()
     employees = EmployeeModel.objects.all()
     reviews = Reviews.objects.filter(created_date__lte=timezone.now()).filter(validation='y').order_by(
@@ -211,7 +211,7 @@ def home_page_view(request):
                 send_mail(subject, message + '\n' + str(phone_number), sender, recipients)
             except BadHeaderError:  # Защита от уязвимости
                 return HttpResponse('Invalid header found')
-            context = {'message': 'Спасибо за вашу заявку, скоро мы ответим!', 'site_info': site_info,
+            context = {'message': 'Спасибо за вашу заявку, скоро мы ответим!', 'site_info': site_info(),
                        'services': Practice_areas.objects.all()}
             return render(request, 'HomePage/thanks.html', context)
     else:
@@ -224,10 +224,10 @@ def home_page_view(request):
             text = review_form.cleaned_data['text']
             review_form.save(commit=True)
             context = {'message': 'Спасибо. Мы благодарны Вам за оставленный отзыв!',
-                       'site_info': site_info, 'services': Practice_areas.objects.all()}
+                       'site_info': site_info(), 'services': Practice_areas.objects.all()}
             return render(request, 'HomePage/thanks.html', context)
     else:
         review_form = ReviewForm()
     return render(request, 'HomePage/home.html',
-                  {'site_info': site_info, 'partners': partners, 'employees': employees, 'form': form,
+                  {'site_info': site_info(), 'partners': partners, 'employees': employees, 'form': form,
                    'reviews': reviews, 'review_form': review_form, 'practice_areas': practice_areas})
