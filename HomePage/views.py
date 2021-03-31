@@ -1,5 +1,3 @@
-from django.core.mail import send_mail, BadHeaderError
-from django.http import HttpResponse
 from django.shortcuts import render
 from django.utils import timezone
 from django.views.generic import View
@@ -35,12 +33,6 @@ class ContactView(View):
                 phone_number = form.cleaned_data['phone_number']
                 sender = form.cleaned_data['sender']
                 form.save(commit=True)
-                subject = f'Сообщение с формы от {sender}'
-                recipients = ['cult6.cult6.cult6@gmail.com']
-                try:
-                    send_mail(subject, message + '\n' + str(phone_number), sender, recipients)
-                except BadHeaderError:  # Защита от уязвимости
-                    return HttpResponse('Invalid header found')
                 context = {'message': 'Спасибо за вашу заявку, скоро мы ответим!',
                            'site_info': Site_info(),
                            'services': Practice_areas.objects.all()}
@@ -83,12 +75,6 @@ class ServiceDetail(View):
                 phone_number = form.cleaned_data['phone_number']
                 sender = form.cleaned_data['sender']
                 form.save(commit=True)
-                subject = f'Сообщение с формы от {sender}'
-                recipients = ['cult6.cult6.cult6@gmail.com']
-                try:
-                    send_mail(subject, message + '\n' + str(phone_number), sender, recipients)
-                except BadHeaderError:  # Защита от уязвимости
-                    return HttpResponse('Invalid header found')
                 context = {'message': 'Спасибо за вашу заявку, скоро мы ответим!', 'site_info': Site_info(),
                            'services': Practice_areas.objects.all()}
                 return render(request, 'HomePage/thanks.html', context)
@@ -132,12 +118,6 @@ class ServicesListView(View):
                 phone_number = form.cleaned_data['phone_number']
                 sender = form.cleaned_data['sender']
                 form.save(commit=True)
-                subject = f'Сообщение с формы от {sender}'
-                recipients = ['cult6.cult6.cult6@gmail.com']
-                try:
-                    send_mail(subject, message + '\n' + str(phone_number), sender, recipients)
-                except BadHeaderError:  # Защита от уязвимости
-                    return HttpResponse('Invalid header found')
                 context = {'message': 'Спасибо за вашу заявку, скоро мы ответим!', 'site_info': Site_info(),
                            'services': Practice_areas.objects.all()}
                 return render(request, 'HomePage/thanks.html', context)
@@ -176,12 +156,6 @@ class AboutListView(View):
                 phone_number = form.cleaned_data['phone_number']
                 sender = form.cleaned_data['sender']
                 form.save(commit=True)
-                subject = f'Сообщение с формы от {sender}'
-                recipients = ['cult6.cult6.cult6@gmail.com']
-                try:
-                    send_mail(subject, message + '\n' + str(phone_number), sender, recipients)
-                except BadHeaderError:  # Защита от уязвимости
-                    return HttpResponse('Invalid header found')
                 context = {'message': 'Спасибо за вашу заявку, скоро мы ответим!', 'site_info': Site_info(),
                            'services': Practice_areas.objects.all()}
                 return render(request, 'HomePage/thanks.html', context)
@@ -205,12 +179,6 @@ def home_page_view(request):
             phone_number = form.cleaned_data['phone_number']
             sender = form.cleaned_data['sender']
             form.save(commit=True)
-            subject = f'Сообщение с формы от {sender}'
-            recipients = ['cult6.cult6.cult6@gmail.com']
-            try:
-                send_mail(subject, message + '\n' + str(phone_number), sender, recipients)
-            except BadHeaderError:  # Защита от уязвимости
-                return HttpResponse('Invalid header found')
             context = {'message': 'Спасибо за вашу заявку, скоро мы ответим!', 'site_info': Site_info(),
                        'services': Practice_areas.objects.all()}
             return render(request, 'HomePage/thanks.html', context)

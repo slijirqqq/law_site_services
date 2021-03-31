@@ -133,9 +133,3 @@ MEDIA_URL = '/media/'
 
 PHONENUMBER_DEFAULT_REGION = 'RU'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'cult6.cult6.cult6@gmail.com'
-EMAIL_HOST_PASSWORD = 'Pashatehniqueaue32'
-EMAIL_USE_TLS = True
