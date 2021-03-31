@@ -42,7 +42,7 @@ class SiteInfo(models.Model):
 class PartnerModel(models.Model):
     partner_name = models.CharField(max_length=20, verbose_name='Название компании')
     partner_url = models.URLField(verbose_name='ссылка на сайт компании')
-    partner_logo = models.ImageField(upload_to='partner_logo/', verbose_name='Лого компании')
+    partner_logo = ThumbnailerImageField(upload_to='partner_logo/', verbose_name='Лого компании')
 
     def __str__(self):
         return self.partner_name
@@ -58,7 +58,9 @@ class EmployeeModel(models.Model):
     middle_name = models.CharField(max_length=20, verbose_name='Отчество', blank=True)
     specialization = models.CharField(max_length=40, verbose_name='Специализация')
     about = models.CharField(max_length=300, verbose_name='О сотруднике')
-    employee_image = models.ImageField(upload_to='employees_images/', verbose_name="Фото")
+    employee_image = ThumbnailerImageField(upload_to='employees_images/',
+                                           verbose_name="Фото", resize_source=dict(quality=95,
+                                                                                   size=(300, 320)))
     vk_url = models.URLField(verbose_name='ссылка на вк', blank=True)
     whatsapp_url = models.URLField(verbose_name='ссылка на whatsapp', blank=True)
     telegram_url = models.URLField(verbose_name='ссылка на telegram', blank=True)
@@ -97,8 +99,11 @@ class Practice_areas(models.Model):
     title = models.CharField(max_length=50, verbose_name='Название услуги')
     preview_text = models.CharField(max_length=400, verbose_name='Текст описания')
     overview_text = models.TextField(verbose_name='Полный текст описания')
-    preview_image = models.ImageField(upload_to='practice_image/preview/', verbose_name="Превью услуги")
-    overview_image = models.ImageField(upload_to='practice_image/', verbose_name='Фото для детального описания')
+    preview_image = ThumbnailerImageField(upload_to='practice_image/preview/',
+                                          verbose_name="Превью услуги", resize_source=dict(quality=95,
+                                                                                           size=(100, 100)))
+    overview_image = ThumbnailerImageField(upload_to='practice_image/', verbose_name='Фото для детального описания',
+                                           resize_source=dict(quality=95, size=(1000, 650)))
 
     price = models.DecimalField(default=0.00, max_digits=10, decimal_places=2,
                                 verbose_name='Цена', null=True)
@@ -115,8 +120,10 @@ class Practice_areas(models.Model):
 
 
 class AboutPageModel(models.Model):
-    preview_image = models.ImageField(upload_to='images/', verbose_name='Фото для превью страницы О нас')
-    second_preview_image = models.ImageField(upload_to='images/', verbose_name='Фото для превью страницы О нас 2')
+    preview_image = ThumbnailerImageField(upload_to='images/', verbose_name='Фото для превью страницы О нас',
+                                          resize_source=dict(quality=95, size=(1200, 1200)))
+    second_preview_image = ThumbnailerImageField(upload_to='images/', verbose_name='Фото для превью страницы О нас 2',
+                                                 resize_source=dict(quality=95, size=(1200, 1900)))
     our_mission = models.CharField(max_length=200, verbose_name='Наша миссия')
     our_vision = models.CharField(max_length=200, verbose_name='Наше видиние')
     our_value = models.CharField(max_length=200, verbose_name='Наща ценность')
@@ -136,7 +143,8 @@ class AboutPageModel(models.Model):
 
 class SertificatesModel(models.Model):
     id_about_page_model = models.ForeignKey(AboutPageModel, on_delete=models.CASCADE)
-    sertificat_image = models.ImageField(upload_to='images/', verbose_name='Сертификат')
+    sertificat_image = ThumbnailerImageField(upload_to='images/', verbose_name='Сертификат',
+                                             resize_source=dict(quality=95, size=(1200, 1200)))
 
     def __str__(self):
         return '{} сертификат'.format(self.id)
