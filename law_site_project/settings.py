@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'HomePage.apps.HomepageConfig',
     'easy_thumbnails',
     'crispy_forms',
-    'phonenumber_field'
+    'phonenumber_field',
+    'whitenoise'
 ]
 
 MIDDLEWARE = [
