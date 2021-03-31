@@ -12,6 +12,11 @@ from .models import SiteInfo, PartnerModel, EmployeeModel, Reviews, Practice_are
 def Site_info():
     return SiteInfo.objects.all()
 
+
+def About_page_model():
+    return AboutPageModel.objects.all()
+
+
 class ContactView(View):
     template_name = 'HomePage/contact.html'
     context = {'site_info': SiteInfo(), 'services': Practice_areas.objects.all()}
@@ -156,7 +161,7 @@ class AboutListView(View):
     template_name = 'HomePage/about.html'
     context = {'site_info': Site_info(), 'employees': EmployeeModel.objects.all(),
                'sertificates': SertificatesModel.objects.all(),
-               'about': AboutPageModel.objects.last(), 'services': Practice_areas.objects.all()}
+               'about': About_page_model(), 'services': Practice_areas.objects.all()}
 
     def get(self, request):
         self.context['form'] = ContactForm()
