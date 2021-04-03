@@ -8,11 +8,11 @@ from .models import SiteInfo, PartnerModel, EmployeeModel, Reviews, Practice_are
 
 
 def Site_info():
-    return SiteInfo.objects.get(pk=1)
+    return SiteInfo.objects.all()
 
 
 def About_page_model():
-    return AboutPageModel.objects.get(pk=1)
+    return AboutPageModel.objects.all()
 
 
 class ContactView(View):
