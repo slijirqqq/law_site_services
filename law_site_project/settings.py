@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage',
     'django.contrib.staticfiles',
     'HomePage.apps.HomepageConfig',
     'easy_thumbnails',
@@ -116,6 +117,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'hluyugrkv',
+    'API_KEY': '673351793878821',
+    'API_SECRET': 'LHcXZVG1jimu1kPQXWv35fMqTq0',
+}
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 import dj_database_url
 
 dj_env_url = dj_database_url.config()
@@ -134,8 +142,3 @@ MEDIA_URL = '/media/'
 PHONENUMBER_DEFAULT_REGION = 'RU'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'hluyugrkv',
-    'API_KEY': '673351793878821',
-    'API_SECRET': 'LHcXZVG1jimu1kPQXWv35fMqTq0',
-}
