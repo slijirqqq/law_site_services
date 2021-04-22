@@ -35,7 +35,6 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'cloudinary_storage',
     'django.contrib.staticfiles',
     'HomePage.apps.HomepageConfig',
     'easy_thumbnails',
@@ -140,4 +139,3 @@ CLOUDINARY_STORAGE = {
     'API_KEY': '673351793878821',
     'API_SECRET': 'LHcXZVG1jimu1kPQXWv35fMqTq0',
 }
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
