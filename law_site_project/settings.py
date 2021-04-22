@@ -35,8 +35,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'cloudinary_storage',
     'django.contrib.staticfiles',
+    'cloudinary_storage',
     'HomePage.apps.HomepageConfig',
     'easy_thumbnails',
     'crispy_forms',
@@ -141,4 +141,3 @@ MEDIA_URL = '/media/'
 
 PHONENUMBER_DEFAULT_REGION = 'RU'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
