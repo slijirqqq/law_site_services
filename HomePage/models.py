@@ -98,18 +98,19 @@ class Reviews(models.Model):
 class Practice_areas(models.Model):
     title = models.CharField(max_length=50, verbose_name='Название услуги')
     preview_text = models.CharField(max_length=400, verbose_name='Текст описания')
-    overview_text = models.TextField(verbose_name='Полный текст описания')
+    # overview_text = models.TextField(verbose_name='Полный текст описания')
     preview_image = ThumbnailerImageField(upload_to='practice_image/preview/',
                                           verbose_name="Превью услуги", resize_source=dict(quality=95,
                                                                                            size=(100, 100)))
-    overview_image = ThumbnailerImageField(upload_to='practice_image/', verbose_name='Фото для детального описания',
-                                           resize_source=dict(quality=95, size=(1000, 650)))
+    # overview_image = ThumbnailerImageField(upload_to='practice_image/', verbose_name='Фото для детального описания',
+    #                                       resize_source=dict(quality=95, size=(1000, 650)))
 
-    price = models.DecimalField(default=0.00, max_digits=10, decimal_places=2,
-                                verbose_name='Цена', null=True)
+    # price = models.DecimalField(default=0.00, max_digits=10, decimal_places=2,
+    #                            verbose_name='Цена', null=True)
 
     def __str__(self):
-        return 'Услуга: {}, Цена: {}'.format(self.title, self.price)
+        # return 'Услуга: {}, Цена: {}'.format(self.title, self.price)
+        return 'Услуга: {}'.format(self.title)
 
     def get_absolute_url(self):
         return reverse('Practice-detail', args=[str(self.id)])

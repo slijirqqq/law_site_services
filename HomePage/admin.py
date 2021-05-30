@@ -87,9 +87,9 @@ class PracticeAdmin(admin.ModelAdmin):
         ('Превью услуги', {
             'fields': ('title', 'preview_image', 'preview_text')
         }),
-        ('Полное описание услуги', {
-            'fields': ('overview_text', 'price', 'overview_image')
-        })
+        #('Полное описание услуги', {
+            #'fields': ('overview_text', 'price', 'overview_image')
+        #})
     )
 
 
