@@ -31,7 +31,10 @@
 
 {% block foot-services %}
     {% for service in services %}
-        <li><a href="{% url 'service-detail' service.pk %}" class="py-1 d-block"><span class="ion-ios-arrow-forward mr-3"></span>{{ service.title }}</a>
+        <!--<li><a href="{#% url 'service-detail' service.pk %#}" class="py-1 d-block"><span
+                class="ion-ios-arrow-forward mr-3"></span>{#{ service.title }#}</a>
         </li>
+        -->
+        <li><p class="py-1 d-block"><span class="ion-ios-arrow-forward mr-3"></span>{{ service.title }}</p></li>
     {% endfor %}
 {% endblock %}

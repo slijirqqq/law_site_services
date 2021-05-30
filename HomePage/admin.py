@@ -98,7 +98,7 @@ class SertificatesInstanceInline(admin.TabularInline):
     model = SertificatesModel
 """
 
-"""
+
 @admin.register(AboutPageModel)
 class AboutPageAdmin(admin.ModelAdmin):
     empty_value_display = '???'
@@ -114,8 +114,8 @@ class AboutPageAdmin(admin.ModelAdmin):
             'fields': ('professional_employees', 'clients_work', 'succses_areas', 'consultation_price')
         })
     )
-    inlines = [SertificatesInstanceInline]
-"""
+    # inlines = [SertificatesInstanceInline]
+
 
 class AnswerInline(admin.TabularInline):
     extra = 1

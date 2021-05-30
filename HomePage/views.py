@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.utils import timezone
 
 from .forms import ContactForm, ReviewForm
-from .models import SiteInfo, Reviews, Practice_areas
+from .models import SiteInfo, Reviews, Practice_areas, AboutPageModel, Questions
 
 
 # from .models import SiteInfo, PartnerModel, EmployeeModel, Reviews, Practice_areas, AboutPageModel, SertificatesModel, \
@@ -173,6 +173,8 @@ def home_page_view(request):
     reviews = Reviews.objects.filter(created_date__lte=timezone.now()).filter(validation='y').order_by(
         "created_date").reverse()[:4]
     practice_areas = Practice_areas.objects.all()
+    about = AboutPageModel.objects.last()
+    questions = Questions.objects.filter(answers__validation='y')[:3]
 
     if request.method == 'POST' and 'sub' in request.POST:
         form = ContactForm(request.POST)
@@ -205,4 +207,4 @@ def home_page_view(request):
 
     return render(request, 'HomePage/home.html',
                   {'site_info': Site_info(), 'form': form, 'reviews': reviews, 'review_form': review_form,
-                   'practice_areas': practice_areas})
+                   'practice_areas': practice_areas, 'about': about, 'questions': questions})

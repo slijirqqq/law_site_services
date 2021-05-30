@@ -47,14 +47,27 @@
 
         <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item {% block home %}{% endblock %}"><a href="{% url 'home' %}"
+                <!--
+                <li class="nav-item {#% block home %#}{#% endblock %#}"><a href="{% url 'home' %}"
                                                                        class="nav-link">Главная</a></li>
-                <li class="nav-item {% block about %}{% endblock %}"><a href="{#% url 'about' %#}" class="nav-link">О
+                <li class="nav-item {#% block about %#}{#% endblock %#}"><a href="{#% url 'about' %#}" class="nav-link">О
                     нас</a></li>
-                <li class="nav-item {% block services %}{% endblock %}"><a href="{#% url 'services' %#}" class="nav-link">Услуги</a>
+                <li class="nav-item {#% block services %#}{#% endblock %#}"><a href="{#% url 'services' %#}"
+                                                                           class="nav-link">Услуги</a>
                 </li>
-                <li class="nav-item {% block contact %}{% endblock %}"><a href="{#% url 'contact' %#}"
+                <li class="nav-item {#% block contact %#}{#% endblock %#}"><a href="{#% url 'contact' %#}"
                                                                           class="nav-link">Контакты</a></li>
+                <li class="nav-item cta"><a href="#contact" class="nav-link">Бесплатная консультация</a></li>
+                -->
+                <li class="nav-item"><a href="#head"
+                                        class="nav-link">Главная</a></li>
+                <li class="nav-item"><a href="#services"
+                                        class="nav-link">Услуги</a>
+                </li>
+                <li class="nav-item"><a href="#section-counter" class="nav-link">О
+                    нас</a></li>
+                <li class="nav-item"><a href="#contacts"
+                                        class="nav-link">Контакты</a></li>
                 <li class="nav-item cta"><a href="#contact" class="nav-link">Бесплатная консультация</a></li>
             </ul>
         </div>
@@ -68,7 +81,7 @@
 {% block content %}
 {% endblock %}
 
-<footer class="ftco-footer ftco-bg-dark ftco-section">
+<footer id="contacts" class="ftco-footer ftco-bg-dark ftco-section">
     <div class="container">
         <div class="row mb-5">
             <div class="col-md">
@@ -76,13 +89,16 @@
                     <h2 class="logo"><a href="#"><img src="{% block logo_foot %}{% endblock %}" alt="site logo"></a>
                     </h2>
                     <ul class="list-unstyled">
-                        <li><a class="py-1 d-block" href="{% url 'home' %}"><span
+                        <li><a class="py-1 d-block" href="#head"><span
                                 class="ion-ios-arrow-forward mr-3"></span>Главная</a></li>
-                        <li><a class="py-1 d-block" href="{#% url 'about' %#}"><span class="ion-ios-arrow-forward mr-3"></span>О нас</a>
+                        <li><a class="py-1 d-block" href="#services"><span
+                                class="ion-ios-arrow-forward mr-3"></span>Услуги</a>
                         </li>
-                        <li><a class="py-1 d-block" href="{#% url 'services' %#}"><span class="ion-ios-arrow-forward mr-3"></span>Услуги</a>
+                        <li><a class="py-1 d-block" href="#section-counter"><span
+                                class="ion-ios-arrow-forward mr-3"></span>О нас</a>
                         </li>
-                        <li><a class="py-1 d-block" href="{#% url 'contact' %#}"><span class="ion-ios-arrow-forward mr-3"></span>Контакты</a>
+                        <li><a class="py-1 d-block" href="#contacts"><span
+                                class="ion-ios-arrow-forward mr-3"></span>Контакты</a>
                         </li>
                     </ul>
                 </div>
@@ -121,8 +137,8 @@
                 </p>
             </div>
             <div class="ft-social" style="margin-right: auto; margin-left: auto">
-                <a href="{% block whatsapp %}{% endblock %}" target="_blank"><i class="icon-whatsapp"></i></a>
-                <a href="{% block vk %}{% endblock %}" target="_blank"><i class="icon-vk"></i></a>
+                <a href="{% block whatsapp %}{% endblock %}" target="_blank"><i class="icon-whatsapp disabled"></i></a>
+                <a href="{% block vk %}{% endblock %}" target="_blank"><i class="icon-vk disabled"></i></a>
                 <a href="{% block telegram %}{% endblock %}" target="_blank"><i class="icon-telegram"></i></a>
                 <a href="{% block instagram %}{% endblock %}" target="_blank"><i class="icon-instagram"></i></a>
             </div>
