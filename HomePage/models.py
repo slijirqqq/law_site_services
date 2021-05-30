@@ -98,7 +98,7 @@ class Reviews(models.Model):
 
 
 class Practice_areas(models.Model):
-    title = models.CharField(max_length=50, verbose_name='Название услуги')
+    title = models.CharField(max_length=60, verbose_name='Название услуги')
     preview_text = models.CharField(max_length=400, verbose_name='Текст описания')
     # overview_text = models.TextField(verbose_name='Полный текст описания')
     preview_image = ThumbnailerImageField(upload_to='practice_image/preview/',
