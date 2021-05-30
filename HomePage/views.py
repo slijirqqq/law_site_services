@@ -11,9 +11,10 @@ def Site_info():
     return SiteInfo.objects.last()
 
 
+# deleted for create landing page
+"""
 def About_page_model():
     return AboutPageModel.objects.last()
-
 
 class ContactView(View):
     template_name = 'HomePage/contact.html'
@@ -161,7 +162,7 @@ class AboutListView(View):
                 return render(request, 'HomePage/thanks.html', context)
             self.context['form'] = form
             return render(request, self.template_name, self.context)
-
+"""
 
 def home_page_view(request):
     site_info = Site_info()
