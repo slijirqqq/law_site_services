@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 import os
 from pathlib import Path
+from .secret import *
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,10 +21,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'q4lw@o933k$&j-2#1^0r92pxkz9tgc=xb@0t2w=it1tpetx0vj')
+SECRET_KEY = DJANGO_SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
+DEBUG = DEBUG_STATUS
 
 ALLOWED_HOSTS = ['*']
 
@@ -117,11 +118,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'hluyugrkv',
-    'API_KEY': '673351793878821',
-    'API_SECRET': 'LHcXZVG1jimu1kPQXWv35fMqTq0',
-}
+CLOUDINARY_STORAGE = DJANGO_CLOUDINARY_STORAGE
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 import dj_database_url
