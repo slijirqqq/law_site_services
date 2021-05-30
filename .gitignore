@@ -85,3 +85,5 @@ env.bak/
 venv.bak/
 
 static/
+
+law_site_project/secret.py

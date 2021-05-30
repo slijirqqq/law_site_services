@@ -22,7 +22,7 @@ class ContactModel(models.Model):
 class SiteInfo(models.Model):
     site_logo = ThumbnailerImageField(upload_to='images/', verbose_name='Логотип сайта')
     favicon = ThumbnailerImageField(upload_to='images/', verbose_name='Логотип сайта во вкладке')
-    name = models.CharField(max_length=20, verbose_name='Название компании')
+    name = models.CharField(max_length=30, verbose_name='Название компании')
     vk_url = models.URLField(verbose_name='Ссылка на вк')
     whatsapp_url = models.URLField(verbose_name='Ссылка на whatsapp')
     telegram_url = models.URLField(verbose_name='Ссылка на telegram')
@@ -38,7 +38,7 @@ class SiteInfo(models.Model):
         verbose_name = 'Контент сайта'
         verbose_name_plural = 'Контент сайта'
 
-
+"""
 class PartnerModel(models.Model):
     partner_name = models.CharField(max_length=20, verbose_name='Название компании')
     partner_url = models.URLField(verbose_name='ссылка на сайт компании')
@@ -50,8 +50,9 @@ class PartnerModel(models.Model):
     class Meta:
         verbose_name = 'Компания-клиент'
         verbose_name_plural = 'Компании-клиенты'
+"""
 
-
+"""
 class EmployeeModel(models.Model):
     first_name = models.CharField(max_length=20, verbose_name='Имя')
     last_name = models.CharField(max_length=20, verbose_name='Фамилия')
@@ -71,6 +72,7 @@ class EmployeeModel(models.Model):
     class Meta:
         verbose_name = 'Сотрудник'
         verbose_name_plural = 'Сотрудники'
+"""
 
 
 class Reviews(models.Model):

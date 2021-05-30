@@ -1,8 +1,9 @@
 from django.contrib import admin
 
-from .models import ContactModel, SiteInfo, PartnerModel, EmployeeModel, Reviews, Practice_areas, AboutPageModel, \
-    SertificatesModel, Questions, Answers
+# from .models import ContactModel, SiteInfo, PartnerModel, EmployeeModel, Reviews, Practice_areas, AboutPageModel, \
+#    SertificatesModel, Questions, Answers
 
+from .models import ContactModel, SiteInfo, Reviews, Practice_areas, AboutPageModel, SertificatesModel, Questions, Answers
 
 # admin.site.register(ContactModel, name='Обратная связь')
 # admin.site.register(SiteInfo, name='Контент сайта')
@@ -40,7 +41,7 @@ class ContactAdmin(admin.ModelAdmin):
         })
     )
 
-
+"""
 @admin.register(PartnerModel)
 class PartnerAdmin(admin.ModelAdmin):
     empty_value_display = '???'
@@ -63,7 +64,7 @@ class EmployeeAdmin(admin.ModelAdmin):
             'fields': ('vk_url', 'whatsapp_url', 'telegram_url')
         })
     )
-
+"""
 
 @admin.register(Reviews)
 class ReviewsAdmin(admin.ModelAdmin):
@@ -92,11 +93,12 @@ class PracticeAdmin(admin.ModelAdmin):
         #})
     )
 
-
+"""
 class SertificatesInstanceInline(admin.TabularInline):
     model = SertificatesModel
+"""
 
-
+"""
 @admin.register(AboutPageModel)
 class AboutPageAdmin(admin.ModelAdmin):
     empty_value_display = '???'
@@ -113,7 +115,7 @@ class AboutPageAdmin(admin.ModelAdmin):
         })
     )
     inlines = [SertificatesInstanceInline]
-
+"""
 
 class AnswerInline(admin.TabularInline):
     extra = 1
@@ -132,5 +134,5 @@ class QuestionsAdmin(admin.ModelAdmin):
     inlines = [AnswerInline]
 
 
-admin.site.site_title = 'LAWBOX'
-admin.site.site_header = 'LAWBOX'
+admin.site.site_title = 'LEGAL PARTNERSHIP LK CLM'
+admin.site.site_header = 'LEGAL PARTNERSHIP LK CLM'

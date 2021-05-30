@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from django.utils import timezone
-from django.views.generic import View
 
-from .forms import ContactForm, ReviewForm, QuestionForm
-from .models import SiteInfo, PartnerModel, EmployeeModel, Reviews, Practice_areas, AboutPageModel, SertificatesModel, \
-    Questions
+from .forms import ContactForm, ReviewForm
+from .models import SiteInfo, Reviews, Practice_areas
 
+
+# from .models import SiteInfo, PartnerModel, EmployeeModel, Reviews, Practice_areas, AboutPageModel, SertificatesModel, \
+#    Questions
 
 def Site_info():
     return SiteInfo.objects.last()
@@ -164,10 +165,11 @@ class AboutListView(View):
             return render(request, self.template_name, self.context)
 """
 
+
 def home_page_view(request):
     site_info = Site_info()
-    partners = PartnerModel.objects.all()
-    employees = EmployeeModel.objects.all()
+    # partners = PartnerModel.objects.all()
+    # employees = EmployeeModel.objects.all()
     reviews = Reviews.objects.filter(created_date__lte=timezone.now()).filter(validation='y').order_by(
         "created_date").reverse()[:4]
     practice_areas = Practice_areas.objects.all()
@@ -197,6 +199,10 @@ def home_page_view(request):
             return render(request, 'HomePage/thanks.html', context)
     else:
         review_form = ReviewForm()
+    # return render(request, 'HomePage/home.html',
+    #              {'site_info': Site_info(), 'partners': partners, 'employees': employees, 'form': form,
+    #               'reviews': reviews, 'review_form': review_form, 'practice_areas': practice_areas})
+
     return render(request, 'HomePage/home.html',
-                  {'site_info': Site_info(), 'partners': partners, 'employees': employees, 'form': form,
-                   'reviews': reviews, 'review_form': review_form, 'practice_areas': practice_areas})
+                  {'site_info': Site_info(), 'form': form, 'reviews': reviews, 'review_form': review_form,
+                   'practice_areas': practice_areas})
