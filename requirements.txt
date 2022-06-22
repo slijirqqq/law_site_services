@@ -7,7 +7,7 @@ django-phonenumber-field==5.0.0
 django-registration==2.2
 easy-thumbnails==2.7.1
 gunicorn==20.1.0
-numpy==1.20.1
+numpy==1.22.0
 phonenumbers==8.12.20
 Pillow==8.1.2
 pycifstar==0.2.8
